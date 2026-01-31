@@ -34,8 +34,15 @@ WebSayfa.tr, herkesin **kod yazmasına gerek kalmadan** kendi web sitesini oluş
 - ✅ **Kayıt Sırasında Site Oluşturma** - Otomatik ilk sitesi oluşturulur
 - ✅ **Email Doğrulama** - Güvenli kayıt sistemi
 - ✅ **GitHub Pages Hosting** - Direkt yayını
+- ✅ **Düzenlenebilir İçerik Alanları**:
+  - Hakkımız (Hakkımda sayfası)
+  - Hizmetler (Sunduğunuz hizmetler listesi)
+  - İletişim E-maili
+  - İletişim Telefonu
+- ✅ **Admin Panel** - Tüm siteleri yönetin
+- ✅ **Super Admin Sistemi** - Sınırsız site oluşturma
+- ✅ **Site Limitleri** - Normal kullanıcı 1 site, admin sınırsız
 - ✅ **WhatsApp, Email, Phone Entegrasyonu** - İletişim bilgilerinizi paylaşın
-- ✅ **Admin Paneli** - Tüm siteleri yönetin
 
 ---
 
