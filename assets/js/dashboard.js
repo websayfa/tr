@@ -151,7 +151,7 @@ function loadUserSites() {
 function createSiteItemCard(site) {
     const card = document.createElement('div');
     card.className = 'site-item';
-    const domain = `websayfa/tr/${site.domain}.github.io`;
+    const domain = site.domain || 'belirtilmedi';
     card.innerHTML = `
         <div class="site-item-header">📄</div>
         <div class="site-item-body">
@@ -362,7 +362,7 @@ function loadDomains() {
 
     const list = document.createElement('div');
     userSites.forEach(site => {
-        const domain = `websayfa/tr/${site.domain}.github.io`;
+        const domain = site.domain || 'belirtilmedi';
         const item = document.createElement('div');
         item.className = 'domain-item';
         item.innerHTML = `
