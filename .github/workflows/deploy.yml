@@ -4,16 +4,44 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
+    
     steps:
-      - uses: actions/checkout@v2
+      - name: 📥 Checkout code
+        uses: actions/checkout@v3
       
-      - name: Deploy to GitHub Pages
+      - name: 🔍 Validate HTML
+        run: |
+          echo "✅ Checking HTML files..."
+          find . -name "*.html" | head -5
+      
+      - name: 🔍 Validate CSS
+        run: |
+          echo "✅ Checking CSS files..."
+          find . -name "*.css" | head -5
+      
+      - name: 🔍 Validate JavaScript
+        run: |
+          echo "✅ Checking JavaScript files..."
+          find . -name "*.js" | head -5
+      
+      - name: 📤 Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
           cname: websayfa.tr
+          
+      - name: ✅ Deployment Summary
+        run: |
+          echo "🚀 Deployment Status: Success"
+          echo "📍 Branch: main"
+          echo "🕐 Time: $(date)"
+

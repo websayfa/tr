@@ -8,6 +8,19 @@
 
 ---
 
+## ⚡ Hızlı Başlangıç (5 dakika)
+
+| Amacınız | Rehber | Süre |
+|----------|--------|------|
+| 🌐 Direkt kullan | [Ana Site](https://websayfa.github.io/tr) | Hemen |
+| 🔧 Fork et + GitHub Pages | [QUICKSTART.md](QUICKSTART.md) | 5 dk |
+| 🏠 Kendi domain'e kur | [DEPLOYMENT.md](DEPLOYMENT.md) | 15 dk |
+| 💻 Yerel geliştirme | [KURULUM_REHBERI.md](KURULUM_REHBERI.md) | 10 dk |
+| 🔐 Özel domain satın al | [CUSTOM_DOMAIN_GUIDE.md](CUSTOM_DOMAIN_GUIDE.md) | 30 dk |
+| 🏗️ Teknik mimari | [TEKNIK_DOKUMANTASYON.md](TEKNIK_DOKUMANTASYON.md) | 1 saat |
+
+---
+
 ## 🎯 Nedir WebSayfa.tr?
 
 WebSayfa.tr, herkesin **kod yazmasına gerek kalmadan** kendi web sitesini oluşturabileceği, tamamen **ücretsiz** bir web sitesi oluşturucu platformudur.
