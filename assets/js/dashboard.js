@@ -6,7 +6,7 @@ class SiteManager {
         this.sites = this.loadUserSites();
     }
 
-    createSite(name, category, theme, domain, description, isPublic) {
+    createSite(name, category, theme, domain, description, isPublic, about = '', services = '', contactEmail = '', contactPhone = '') {
         const site = {
             id: Date.now().toString(),
             username: this.user.username,
@@ -20,9 +20,10 @@ class SiteManager {
             icon: '📄',
             createdAt: new Date().toISOString(),
             content: {
-                about: '',
-                services: '',
-                contact: this.user.email
+                about: about,
+                services: services,
+                contact: contactEmail || this.user.email,
+                phone: contactPhone
             }
         };
 
@@ -220,11 +221,24 @@ function setupCreateSiteForm() {
         const theme = document.getElementById('siteTheme').value;
         const domain = document.getElementById('siteDomain').value.toLowerCase().replace(/[^a-z0-9-]/g, '-');
         const description = document.getElementById('siteDescription').value;
+        const about = document.getElementById('siteAbout').value;
+        const services = document.getElementById('siteServices').value;
+        const contactEmail = document.getElementById('siteContactEmail').value;
+        const contactPhone = document.getElementById('siteContactPhone').value;
         const isPublic = document.getElementById('sitePublic').checked;
 
         // Validasyon
         if (!domain || domain.length < 3) {
             alert('Domain adı en az 3 karakter olmalıdır');
+            return;
+        }
+
+        // Site limiti kontrolü (Super admin sınırsız, normal kullanıcı 1)
+        const isSuperAdmin = authManager.currentUser && authManager.currentUser.isSuperAdmin === true;
+        const userSiteLimit = isSuperAdmin ? Infinity : 1;
+        
+        if (siteManager.sites.length >= userSiteLimit) {
+            alert(`Maksimum ${userSiteLimit} site oluşturabilirsiniz. Yeni site oluşturmak için bir siteyi silmelisiniz.`);
             return;
         }
 
@@ -235,7 +249,7 @@ function setupCreateSiteForm() {
             return;
         }
 
-        const site = siteManager.createSite(name, category, theme, domain, description, isPublic);
+        const site = siteManager.createSite(name, category, theme, domain, description, isPublic, about, services, contactEmail, contactPhone);
         
         alert('Site başarıyla oluşturuldu!');
         form.reset();
@@ -254,6 +268,10 @@ function openEditSiteModal(siteId) {
     document.getElementById('editSiteCategory').value = site.category;
     document.getElementById('editSiteTheme').value = site.theme;
     document.getElementById('editSiteDescription').value = site.description;
+    document.getElementById('editSiteAbout').value = site.content?.about || '';
+    document.getElementById('editSiteServices').value = site.content?.services || '';
+    document.getElementById('editSiteContactEmail').value = site.content?.contact || '';
+    document.getElementById('editSiteContactPhone').value = site.content?.phone || '';
     document.getElementById('editSitePublic').checked = site.isPublic;
 
     document.getElementById('editModal').classList.add('show');
@@ -276,7 +294,13 @@ function setupEditSiteForm() {
             category: document.getElementById('editSiteCategory').value,
             theme: document.getElementById('editSiteTheme').value,
             description: document.getElementById('editSiteDescription').value,
-            isPublic: document.getElementById('editSitePublic').checked
+            isPublic: document.getElementById('editSitePublic').checked,
+            content: {
+                about: document.getElementById('editSiteAbout').value,
+                services: document.getElementById('editSiteServices').value,
+                contact: document.getElementById('editSiteContactEmail').value,
+                phone: document.getElementById('editSiteContactPhone').value
+            }
         };
 
         siteManager.updateSite(siteId, updates);
@@ -376,22 +400,44 @@ function loadAllUsers() {
 
         const userItem = document.createElement('div');
         userItem.className = 'user-item';
+        const isSuperAdmin = user.isSuperAdmin === true;
+        const adminBadge = isSuperAdmin ? ' 👑 SUPER ADMIN' : (user.adminPanel ? ' 👤 Admin' : '');
+        
         userItem.innerHTML = `
             <div class="user-item-header">
                 <div>
-                    <div class="user-item-name">${user.username}</div>
+                    <div class="user-item-name">${user.username}${adminBadge}</div>
                     <div class="user-item-email">${user.email}</div>
                 </div>
                 <small>${userSites.length} site</small>
             </div>
             <div class="user-item-actions">
+                ${user.adminPanel && authManager.currentUser && authManager.currentUser.isSuperAdmin ? 
+                    `<button onclick="toggleSuperAdmin('${userId}')" style="background: #ff9800;">
+                        ${isSuperAdmin ? 'Super Admin Kaldır' : 'Super Admin Yap'}
+                    </button>` : ''}
                 <button onclick="toggleUserPublic('${userId}')">
                     ${user.isPublic ? 'Gizle' : 'Göster'}
                 </button>
-                <button onclick="deleteUser('${userId}')">Sil</button>
+                <button onclick="deleteUser('${userId}')" style="background: #f44336;">Sil</button>
             </div>
         `;
         container.appendChild(userItem);
+    }
+}
+
+function toggleSuperAdmin(userId) {
+    if (!authManager.currentUser || !authManager.currentUser.isSuperAdmin) {
+        alert('Bu işlemi yapmak için super admin olmanız gerekir');
+        return;
+    }
+
+    const user = authManager.users[userId];
+    if (user.adminPanel) {
+        user.isSuperAdmin = !user.isSuperAdmin;
+        authManager.saveUsers();
+        alert(`${user.username} ${user.isSuperAdmin ? 'super admin' : 'normal admin'} yapıldı`);
+        loadAllUsers();
     }
 }
 

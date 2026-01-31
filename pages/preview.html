@@ -611,10 +611,59 @@
             const urlParams = new URLSearchParams(window.location.search);
             const siteId = urlParams.get('id');
             
+            // Önce DEMO_SITES'te ara
             currentSite = DEMO_SITES.find(s => s.id === siteId);
             
+            // Eğer bulunamazsa, localStorage'dan kullanıcı sitesini ara
             if (!currentSite) {
-                document.getElementById('siteContent').innerHTML = '<p style="padding: 2rem; text-align: center;">Site bulunamadı</p>';
+                // Tüm kullanıcı sitelerini ara
+                const allUsers = authManager && authManager.users ? authManager.users : {};
+                for (let userId in allUsers) {
+                    const key = `user_sites_${userId}`;
+                    const encrypted = localStorage.getItem(key);
+                    if (encrypted) {
+                        try {
+                            const sites = SimpleCrypto.decryptObject(encrypted) || [];
+                            const userSite = sites.find(s => s.id === siteId);
+                            if (userSite) {
+                                currentSite = userSite;
+                                // Kullanıcı sitesini DEMO_SITES formatına dönüştür
+                                currentSite.content = {
+                                    about: {
+                                        tr: 'Hakkımızda',
+                                        en: 'About Us'
+                                    },
+                                    aboutDesc: {
+                                        tr: userSite.content?.about || '',
+                                        en: userSite.content?.about || ''
+                                    },
+                                    services: {
+                                        tr: 'Hizmetlerimiz',
+                                        en: 'Our Services'
+                                    },
+                                    servicesList: {
+                                        tr: (userSite.content?.services || '').split(',').map(s => s.trim()),
+                                        en: (userSite.content?.services || '').split(',').map(s => s.trim())
+                                    },
+                                    contact: {
+                                        tr: 'İletişim',
+                                        en: 'Contact'
+                                    },
+                                    email: userSite.content?.contact || userSite.content?.email || '',
+                                    phone: userSite.content?.phone || '+90 555 123 4567',
+                                    whatsapp: (userSite.content?.phone || '+905551234567').replace(/[\s\-()]/g, '')
+                                };
+                                break;
+                            }
+                        } catch (e) {
+                            console.log('Şifreli veri çözelemiyor:', e);
+                        }
+                    }
+                }
+            }
+            
+            if (!currentSite) {
+                document.getElementById('siteContent').innerHTML = '<p style="padding: 2rem; text-align: center;">❌ Site bulunamadı</p>';
                 return;
             }
 

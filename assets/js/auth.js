@@ -80,7 +80,8 @@ class AuthManager {
             createdAt: new Date().toISOString(),
             sites: [],
             isPublic: true,
-            adminPanel: false
+            adminPanel: false,
+            isSuperAdmin: false  // Super admin bayrağı (sadece admin panel'den ayarlanabilir)
         };
 
         this.users[user.id] = user;

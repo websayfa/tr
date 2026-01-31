@@ -84,7 +84,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Admin varsa, panele yönlendir
-            if (authManager && authManager.currentUser && authManager.currentUser.adminPanel) {
+            if (authManager && authManager.currentUser && (authManager.currentUser.adminPanel || authManager.currentUser.isSuperAdmin)) {
                 window.location.href = 'pages/dashboard.html';
                 return;
             }
