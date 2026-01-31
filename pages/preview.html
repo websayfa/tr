@@ -639,6 +639,7 @@
             // Content
             let mainHTML = '';
             const content = site.content;
+            console.log('content:', content);
             
             // About Section
             mainHTML += `
@@ -649,6 +650,7 @@
                     </div>
                 </section>
             `;
+            console.log('About section eklendi. mainHTML length:', mainHTML.length);
             
             // Services/Products Section
             const serviceName = content.services ? content.services[currentLang] : 'Hizmetler';
@@ -698,7 +700,9 @@
                 </section>
             `;
             
+            console.log('mainHTML hazır, length:', mainHTML.length);
             document.getElementById('siteContent').innerHTML = mainHTML;
+            console.log('siteContent innerHTML yazıldı');
         }
 
         function setupLanguageSwitcher() {
