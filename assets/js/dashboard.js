@@ -122,10 +122,12 @@ document.addEventListener('DOMContentLoaded', () => {
 // Kullanıcı bilgisini göster
 function updateUserInfo() {
     const user = authManager.currentUser;
+    const adminBadge = user.isSuperAdmin ? ' 👑' : (user.adminPanel ? ' 👤' : '');
+    const siteLimit = user.isSuperAdmin ? '∞' : '1';
     document.getElementById('userInfo').innerHTML = `
-        <strong>${user.username}</strong><br>
+        <strong>${user.username}${adminBadge}</strong><br>
         <small>${user.email}</small><br>
-        <small style="opacity: 0.8;">${user.sites ? user.sites.length : siteManager.sites.length} site</small>
+        <small style="opacity: 0.8;">${siteManager.sites.length}/${siteLimit} site</small>
     `;
 }
 

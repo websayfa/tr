@@ -39,11 +39,12 @@ class AuthManager {
                 createdAt: new Date().toISOString(),
                 sites: [],
                 isPublic: false,
-                adminPanel: true
+                adminPanel: true,
+                isSuperAdmin: true  // İlk admin super admin
             };
             this.users[adminUser.id] = adminUser;
             this.saveUsers();
-            console.log('Admin hesabı oluşturuldu: admin@websayfa.tr / admin123');
+            console.log('Admin hesabı oluşturuldu: admin@websayfa.tr / admin123 (Super Admin)');
         }
     }
 
