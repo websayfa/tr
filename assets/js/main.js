@@ -15,7 +15,10 @@ const THEMES = {
     nature: { name: 'Nature', class: 'theme-nature' },
     elegant: { name: 'Elegant', class: 'theme-elegant' },
     classic: { name: 'Classic', class: 'theme-classic' },
-    agency: { name: 'Agency', class: 'theme-agency' }
+    agency: { name: 'Agency', class: 'theme-agency' },
+    startup: { name: 'Startup', class: 'theme-startup' },
+    corporate: { name: 'Corporate', class: 'theme-corporate' },
+    vibrant: { name: 'Vibrant', class: 'theme-vibrant' }
 };
 
 // Demo siteler

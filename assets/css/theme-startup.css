@@ -1,0 +1,25 @@
+/* Startup theme - bold, vibrant */
+:root {
+    --startup-primary: #00d4ff;
+}
+
+body.theme-startup {
+    background: #0a0e27;
+    color: #e0e6ed;
+    font-family: 'Poppins', system-ui, sans-serif;
+}
+
+.theme-startup .site-card-header {
+    background: linear-gradient(135deg, #1e3a8a 0%, #0c4a6e 100%);
+    color: var(--startup-primary);
+}
+
+.theme-startup .hero {
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+    color: var(--startup-primary);
+}
+
+.theme-startup .btn-primary {
+    background: var(--startup-primary);
+    color: #0a0e27;
+}

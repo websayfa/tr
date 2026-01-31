@@ -792,7 +792,47 @@
                         </header>
                     `;
                     break;
-                case 'dark':
+                case 'startup':
+                    headerHTML = `
+                        <header class="hero variant-modern">
+                            <div class="hero-inner container">
+                                <h1 id="headerTitle">${titleText}</h1>
+                                <p id="headerSubtitle">${subtitleText}</p>
+                                <div class="hero-cta">
+                                    <a href="#siteContent" class="btn btn-large btn-primary">${currentLang === 'tr' ? 'Hemen İncele' : 'Explore'}</a>
+                                </div>
+                            </div>
+                        </header>
+                    `;
+                    break;
+
+                case 'corporate':
+                    headerHTML = `
+                        <header class="hero variant-elegant">
+                            <div class="hero-inner container">
+                                <h1 id="headerTitle">${titleText}</h1>
+                                <p id="headerSubtitle">${subtitleText}</p>
+                                <div class="hero-cta">
+                                    <a href="#siteContent" class="btn btn-large btn-primary">${currentLang === 'tr' ? 'Hemen İncele' : 'Explore'}</a>
+                                </div>
+                            </div>
+                        </header>
+                    `;
+                    break;
+
+                case 'vibrant':
+                    headerHTML = `
+                        <header class="hero variant-modern">
+                            <div class="hero-inner container">
+                                <h1 id="headerTitle">${titleText}</h1>
+                                <p id="headerSubtitle">${subtitleText}</p>
+                                <div class="hero-cta">
+                                    <a href="#siteContent" class="btn btn-large btn-primary">${currentLang === 'tr' ? 'Hemen İncele' : 'Explore'}</a>
+                                </div>
+                            </div>
+                        </header>
+                    `;
+                    break;                case 'dark':
                     headerHTML = `
                         <header class="hero variant-split">
                             <div>

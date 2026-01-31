@@ -1,0 +1,25 @@
+/* Corporate theme - professional */
+:root {
+    --corporate-primary: #1e40af;
+}
+
+body.theme-corporate {
+    background: #f8fafc;
+    color: #1e293b;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.theme-corporate .site-card-header {
+    background: linear-gradient(90deg, #1e40af 0%, #1e3a8a 100%);
+    color: white;
+}
+
+.theme-corporate .hero {
+    background: linear-gradient(90deg, #f1f5f9 0%, #e2e8f0 100%);
+    color: #1e293b;
+}
+
+.theme-corporate .btn-primary {
+    background: var(--corporate-primary);
+    color: white;
+}

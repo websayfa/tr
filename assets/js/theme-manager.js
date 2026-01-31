@@ -60,6 +60,27 @@ class ThemeManager {
                     file: 'theme-agency.css',
                     color: '#ff6b6b',
                     active: true
+                },
+                {
+                    id: 'theme-startup',
+                    name: 'Startup',
+                    file: 'theme-startup.css',
+                    color: '#00d4ff',
+                    active: true
+                },
+                {
+                    id: 'theme-corporate',
+                    name: 'Corporate',
+                    file: 'theme-corporate.css',
+                    color: '#1e40af',
+                    active: true
+                },
+                {
+                    id: 'theme-vibrant',
+                    name: 'Vibrant',
+                    file: 'theme-vibrant.css',
+                    color: '#ec4899',
+                    active: true
                 }
             ];
             localStorage.setItem('themes', JSON.stringify(themes));

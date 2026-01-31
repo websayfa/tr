@@ -1,0 +1,25 @@
+/* Vibrant theme - colorful */
+:root {
+    --vibrant-primary: #ec4899;
+}
+
+body.theme-vibrant {
+    background: linear-gradient(135deg, #fce7f3 0%, #fecdd3 100%);
+    color: #831843;
+    font-family: 'Outfit', system-ui, sans-serif;
+}
+
+.theme-vibrant .site-card-header {
+    background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+    color: white;
+}
+
+.theme-vibrant .hero {
+    background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+    color: white;
+}
+
+.theme-vibrant .btn-primary {
+    background: var(--vibrant-primary);
+    color: white;
+}
