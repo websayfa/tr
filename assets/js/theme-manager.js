@@ -46,6 +46,20 @@ class ThemeManager {
                     file: 'theme-elegant.css',
                     color: '#9b59b6',
                     active: true
+                },
+                {
+                    id: 'theme-classic',
+                    name: 'Classic',
+                    file: 'theme-classic.css',
+                    color: '#111827',
+                    active: true
+                },
+                {
+                    id: 'theme-agency',
+                    name: 'Agency',
+                    file: 'theme-agency.css',
+                    color: '#ff6b6b',
+                    active: true
                 }
             ];
             localStorage.setItem('themes', JSON.stringify(themes));

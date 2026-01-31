@@ -13,7 +13,9 @@ const THEMES = {
     modern: { name: 'Modern', class: 'theme-modern' },
     dark: { name: 'Dark', class: 'theme-dark' },
     nature: { name: 'Nature', class: 'theme-nature' },
-    elegant: { name: 'Elegant', class: 'theme-elegant' }
+    elegant: { name: 'Elegant', class: 'theme-elegant' },
+    classic: { name: 'Classic', class: 'theme-classic' },
+    agency: { name: 'Agency', class: 'theme-agency' }
 };
 
 // Demo siteler

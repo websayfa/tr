@@ -815,6 +815,29 @@
                         </header>
                     `;
                     break;
++                case 'classic':
++                    headerHTML = `
++                        <header class="hero variant-classic">
++                            <div class="container">
++                                <h1 id="headerTitle">${titleText}</h1>
++                                <p id="headerSubtitle">${subtitleText}</p>
++                            </div>
++                        </header>
++                    `;
++                    break;
++                case 'agency':
++                    headerHTML = `
++                        <header class="hero variant-agency">
++                            <div class="hero-inner container">
++                                <h1 id="headerTitle">${titleText}</h1>
++                                <p id="headerSubtitle">${subtitleText}</p>
++                                <div class="hero-cta">
++                                    <a href="#siteContent" class="btn btn-large btn-primary">${currentLang === 'tr' ? 'Hemen İncele' : 'Explore'}</a>
++                                </div>
++                            </div>
++                        </header>
++                    `;
++                    break;
                 default:
                     headerHTML = `
                         <header class="hero variant-minimal">

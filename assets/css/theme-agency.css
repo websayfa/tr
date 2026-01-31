@@ -1,0 +1,25 @@
+/* Agency theme - bold, dark hero */
+:root {
+    --agency-accent: #ff6b6b;
+}
+
+body.theme-agency {
+    background: linear-gradient(180deg, #0f172a 0%, #0b1220 100%);
+    color: #e6eef8;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+.theme-agency .site-card-header {
+    background: linear-gradient(90deg, #111827 0%, #0b1220 100%);
+    color: var(--agency-accent);
+}
+
+.theme-agency .hero {
+    background: linear-gradient(90deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25)), url('../images/agency-hero.jpg') center/cover no-repeat;
+    color: #fff;
+}
+
+.theme-agency .btn-primary {
+    background: var(--agency-accent);
+    color: white;
+}

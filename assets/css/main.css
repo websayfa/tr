@@ -369,6 +369,16 @@ body {
     background: linear-gradient(135deg, #d4a574 0%, #a8b8c8 100%);
 }
 
+.site-card.theme-classic .site-card-header {
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+    color: #111827;
+}
+
+.site-card.theme-agency .site-card-header {
+    background: linear-gradient(90deg, #0b1220 0%, #111827 100%);
+    color: #ff6b6b;
+}
+
 .site-card-body {
     padding: 1.5rem;
 }
