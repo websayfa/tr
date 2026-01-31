@@ -337,31 +337,53 @@ function saveSettings() {
 // ============ TEMALAR ============
 
 function loadThemes() {
-    const themes = [
-        { id: 'theme-minimal', name: 'Minimal', color: '#fff' },
-        { id: 'theme-modern', name: 'Modern', color: '#667eea' },
-        { id: 'theme-dark', name: 'Koyu', color: '#1a1a1a' },
-        { id: 'theme-nature', name: 'Doğa', color: '#2ecc71' },
-        { id: 'theme-elegant', name: 'Şık', color: '#9b59b6' }
-    ];
-
+    const themes = JSON.parse(localStorage.getItem('themes') || '[]');
     const container = document.getElementById('themeList');
     container.innerHTML = '';
+
+    if (themes.length === 0) {
+        container.innerHTML = '<div class="empty">Tema yok</div>';
+        return;
+    }
 
     themes.forEach(theme => {
         const div = document.createElement('div');
         div.className = 'theme-item';
         div.innerHTML = `
-            <div style="width: 100%; height: 100px; background: ${theme.color}; border-radius: 4px; margin-bottom: 10px;"></div>
+            <div style="width: 100%; height: 100px; background: ${theme.color}; border-radius: 4px; margin-bottom: 10px; border: ${!theme.active ? '2px dashed #ccc' : '2px solid ' + theme.color};"></div>
             <h4>${theme.name}</h4>
             <p style="font-size: 12px; color: #999; margin-bottom: 10px;">${theme.id}</p>
             <div class="theme-actions">
-                <button class="btn btn-approve" onclick="alert('Tema seç: ${theme.name}')">Seç</button>
-                <button class="btn btn-delete" onclick="alert('Tema sil: ${theme.name}')">Sil</button>
+                ${theme.active ? 
+                    `<button class="btn btn-unban" onclick="disableTheme('${theme.id}')">Devre Dışı Bırak</button>` :
+                    `<button class="btn btn-approve" onclick="enableTheme('${theme.id}')">Aktif Et</button>`
+                }
             </div>
         `;
         container.appendChild(div);
     });
+}
+
+function disableTheme(themeId) {
+    const themes = JSON.parse(localStorage.getItem('themes') || '[]');
+    const theme = themes.find(t => t.id === themeId);
+    if (theme) {
+        theme.active = false;
+        localStorage.setItem('themes', JSON.stringify(themes));
+        showAlert('themesAlert', 'Tema devre dışı bırakıldı', 'success');
+        loadThemes();
+    }
+}
+
+function enableTheme(themeId) {
+    const themes = JSON.parse(localStorage.getItem('themes') || '[]');
+    const theme = themes.find(t => t.id === themeId);
+    if (theme) {
+        theme.active = true;
+        localStorage.setItem('themes', JSON.stringify(themes));
+        showAlert('themesAlert', 'Tema aktif edildi', 'success');
+        loadThemes();
+    }
 }
 
 // ============ ÇIKIŞ ============
