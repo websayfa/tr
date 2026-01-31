@@ -101,6 +101,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // SiteManager'ı başlat
     siteManager = new SiteManager(authManager.currentUser);
 
+    // Banned user kontrolü
+    if (authManager.currentUser.banned) {
+        document.body.innerHTML = `
+            <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: #f5f5f5;">
+                <div style="text-align: center; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <h2>🚫 Hesap Banlandı</h2>
+                    <p style="margin: 20px 0; color: #666;">Hesabınız sistem yöneticisi tarafından banlanmıştır.</p>
+                    <p style="color: #999; font-size: 14px;">Daha fazla bilgi için destek ekibiyle iletişime geçin:</p>
+                    <p style="font-weight: bold; color: #667eea;">kodmatik66@gmail.com</p>
+                    <button onclick="logoutFromDashboard()" style="margin-top: 20px; padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer;">Çıkış Yap</button>
+                </div>
+            </div>
+        `;
+        return;
+    }
+
     // UI'yi güncelle
     updateUserInfo();
     loadUserSites();
