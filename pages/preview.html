@@ -436,9 +436,12 @@
         let currentSite = null;
 
         document.addEventListener('DOMContentLoaded', () => {
-            loadSite();
-            setupLanguageSwitcher();
-            setupThemeSwitcher();
+            // main.js yüklenmesini bekle
+            setTimeout(() => {
+                loadSite();
+                setupLanguageSwitcher();
+                setupThemeSwitcher();
+            }, 100);
         });
 
         function loadSite() {
