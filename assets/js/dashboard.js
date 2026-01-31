@@ -241,7 +241,16 @@ function setupCreateSiteForm() {
 
         const name = document.getElementById('siteName').value;
         const category = document.getElementById('siteCategory').value;
-        const theme = document.getElementById('siteTheme').value;
+        let theme = document.getElementById('siteTheme').value;
+        // Eğer tema seçilmemişse kullanıcının varsayılan temasını kullan
+        if (!theme) {
+            try {
+                const user = authManager.currentUser || {};
+                theme = user.defaultTheme || 'minimal';
+            } catch (e) {
+                theme = 'minimal';
+            }
+        }
         const domain = document.getElementById('siteDomain').value.toLowerCase().replace(/[^a-z0-9-]/g, '-');
         const description = document.getElementById('siteDescription').value;
         const about = document.getElementById('siteAbout').value;
@@ -356,6 +365,13 @@ function setupSettingsForm() {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         const newPassword = document.getElementById('newPassword').value;
+        const userTheme = document.getElementById('settingsUserTheme').value;
+
+        // Kaydet: currentUser ve users listesi
+        const user = authManager.currentUser;
+        if (userTheme) {
+            user.defaultTheme = userTheme;
+        }
 
         if (newPassword) {
             user.password = SimpleCrypto.hashPassword(newPassword);
@@ -363,7 +379,18 @@ function setupSettingsForm() {
             alert('Şifre başarıyla değiştirildi');
             document.getElementById('newPassword').value = '';
         } else {
-            alert('Değişiklik yapılmadı');
+            // yine de tema varsa güncelle
+            authManager.saveUser();
+            // users array'i güncelle
+            try {
+                const usersArr = JSON.parse(localStorage.getItem('users') || '[]');
+                const idx = usersArr.findIndex(u => u.id === user.id);
+                if (idx !== -1) {
+                    usersArr[idx].defaultTheme = user.defaultTheme;
+                    localStorage.setItem('users', JSON.stringify(usersArr));
+                }
+            } catch (e) {}
+            alert('Ayarlar kaydedildi');
         }
     });
 }

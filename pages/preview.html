@@ -427,8 +427,8 @@
         let currentTheme = 'minimal';
         let currentSite = null;
 
-        // Demo Siteler (Enhanced)
-        const DEMO_SITES = [
+        // Demo Siteler (Enhanced) - use global DEMO_SITES from main.js when available
+        const DEMO_SITES = (window.DEMO_SITES || [
             {
                 id: 'demo1',
                 title: 'Grafik Tasarımcı',
@@ -599,7 +599,7 @@
                     whatsapp: '+905556667777'
                 }
             }
-        ];
+        ]);
 
         document.addEventListener('DOMContentLoaded', () => {
             loadSite();

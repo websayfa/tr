@@ -103,13 +103,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Domain Adı (sadece harfler ve sayılar)</label>
-                        <div class="domain-input">
-                            <span style="background: #f0f0f0; padding: 0.75rem; border-radius: 4px 0 0 4px; border-right: 1px solid #ddd;">websayfa/tr/</span>
-                            <input type="text" id="siteDomain" required placeholder="sitenin-adi" style="border-radius: 0;">
-                            <span style="background: #f0f0f0; padding: 0.75rem; border-radius: 0 4px 4px 0; border-left: 1px solid #ddd;">.github.io</span>
-                        </div>
-                        <small style="display: block; margin-top: 0.5rem; color: #666;">Örnek: websayfa/tr/<strong>benim-site</strong>.github.io</small>
+                        <label>Domain veya Alt Alan Adı (Tam domain veya slug)</label>
+                        <input type="text" id="siteDomain" required placeholder="example.com veya sub.example.com veya sadece site-slug">
+                        <small style="display: block; margin-top: 0.5rem; color: #666;">Tam domain (örn: example.com) veya sadece slug (örn: benim-site) yazabilirsiniz.</small>
                     </div>
 
                     <div class="form-group">
@@ -197,6 +193,16 @@
                             <div class="form-group">
                                 <label>E-mail</label>
                                 <input type="email" id="settingsEmail" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label>Profil Teması (Varsayılan Tema)</label>
+                                <select id="settingsUserTheme">
+                                    <option value="minimal">Minimal</option>
+                                    <option value="modern">Modern</option>
+                                    <option value="dark">Dark</option>
+                                    <option value="nature">Nature</option>
+                                    <option value="elegant">Elegant</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Yeni Şifre (değiştirmek isterseniz)</label>
