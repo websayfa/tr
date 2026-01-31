@@ -1,0 +1,43 @@
+/* TEMA 2: MODERN - Canlı ve dinamik */
+.theme-modern {
+    --primary: #f093fb;
+    --secondary: #f5576c;
+    --accent: #ffa502;
+}
+
+.theme-modern-preview {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+
+.theme-modern .site-header {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+    border-bottom: 3px solid #ffa502;
+}
+
+.theme-modern .site-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+.theme-modern .section-title {
+    color: #f5576c;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-left: 15px;
+}
+
+.theme-modern .section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #f093fb;
+}

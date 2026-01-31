@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Başlangıç Rehberi - WebSayfa.tr</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        .guide-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .guide-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .guide-header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .guide-header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.9;
+        }
+
+        .guide-section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary);
+        }
+
+        .guide-section h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .guide-section h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .guide-section p {
+            line-height: 1.8;
+            color: #4b5563;
+        }
+
+        .step-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .step-list li {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: var(--light);
+            border-radius: 6px;
+            border-left: 3px solid var(--secondary);
+        }
+
+        .step-number {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 0.75rem;
+            font-weight: bold;
+        }
+
+        .code-block {
+            background: #f5f5f5;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .feature-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card h4 {
+            margin: 0.5rem 0;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 1rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            background: #4f46e5;
+        }
+    </style>
+</head>
+<body>
+    <div class="guide-container">
+        <a href="index.html" class="back-button">← Ana Sayfaya Dön</a>
+
+        <div class="guide-header">
+            <h1>🚀 WebSayfa.tr Başlangıç Rehberi</h1>
+            <p>Adım adım web sitenizi oluşturmayı öğrenin</p>
+        </div>
+
+        <!-- Giriş -->
+        <div class="guide-section">
+            <h2>Hoşgeldiniz! 👋</h2>
+            <p>WebSayfa.tr, kod yazmadan sadece birkaç tıkla profesyonel bir web sitesi oluşturmanızı sağlar. Tamamen ücretsiz, GitHub Pages tarafından desteklenen ve Türkçe/İngilizce desteği olan bir platformdur.</p>
+        </div>
+
+        <!-- İlk Adımlar -->
+        <div class="guide-section">
+            <h2>1️⃣ İlk Adımlar</h2>
+            
+            <h3>Adım 1: Kayıt Ol</h3>
+            <ol class="step-list">
+                <li>
+                    <span class="step-number">1</span>
+                    Ana sayfada <strong>"Kayıt Ol"</strong> butonuna tıklayın
+                </li>
+                <li>
+                    <span class="step-number">2</span>
+                    Kullanıcı adı, e-mail ve şifrenizi girin
+                </li>
+                <li>
+                    <span class="step-number">3</span>
+                    <strong>"Kayıt Ol"</strong> butonuna tıklayarak tamamlayın
+                </li>
+            </ol>
+
+            <h3>Adım 2: Giriş Yap</h3>
+            <ol class="step-list">
+                <li>
+                    <span class="step-number">1</span>
+                    <strong>"Giriş Yap"</strong> butonuna tıklayın
+                </li>
+                <li>
+                    <span class="step-number">2</span>
+                    E-mail ve şifrenizi girin
+                </li>
+                <li>
+                    <span class="step-number">3</span>
+                    Başarılı girişten sonra <strong>Panelim</strong> butonunu göreceksiniz
+                </li>
+            </ol>
+        </div>
+
+        <!-- Site Oluşturma -->
+        <div class="guide-section">
+            <h2>2️⃣ Web Sitenizi Oluşturun</h2>
+            
+            <h3>Yeni Site Eklemek</h3>
+            <ol class="step-list">
+                <li>
+                    <span class="step-number">1</span>
+                    Panelime git ve <strong>"Yeni Site Oluştur"</strong> tıkla
+                </li>
+                <li>
+                    <span class="step-number">2</span>
+                    <strong>Site Adı</strong> gir (örn: "Benim İşletmem")
+                </li>
+                <li>
+                    <span class="step-number">3</span>
+                    Bir <strong>Kategori</strong> seç:
+                    <div style="margin-top: 0.5rem;">
+                        📱 Kişisel | 💼 İşletme | 🎨 Portföy | 📝 Blog | 🛍️ E-Ticaret
+                    </div>
+                </li>
+                <li>
+                    <span class="step-number">4</span>
+                    Beğendiğin <strong>Tema</strong> seç (5 seçenek var)
+                </li>
+                <li>
+                    <span class="step-number">5</span>
+                    <strong>Domain Adı</strong> gir (örn: "benim-isletmem")
+                </li>
+                <li>
+                    <span class="step-number">6</span>
+                    Açıklama ve diğer bilgileri tamamla
+                </li>
+                <li>
+                    <span class="step-number">7</span>
+                    <strong>"Site Oluştur"</strong> tıkla - Bitti! 🎉
+                </li>
+            </ol>
+        </div>
+
+        <!-- Temalar -->
+        <div class="guide-section">
+            <h2>3️⃣ 5 Farklı Tema</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h4>Minimal</h4>
+                    <p>Sade ve temiz, modern tasarım</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h4>Modern</h4>
+                    <p>Canlı renkler, dinamik görünüm</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌙</div>
+                    <h4>Dark</h4>
+                    <p>Koyu tema, profesyonel hava</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌿</div>
+                    <h4>Nature</h4>
+                    <p>Doğal renkler, sakin tasarım</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💎</div>
+                    <h4>Elegant</h4>
+                    <p>Zarif, sofistike görünüş</p>
+                </div>
+            </div>
+
+            <p style="margin-top: 1.5rem; text-align: center; color: #6b7280; font-style: italic;">
+                Her temayı site oluşturduktan sonra değiştirebilirsin!
+            </p>
+        </div>
+
+        <!-- Domain Yönetimi -->
+        <div class="guide-section">
+            <h2>4️⃣ Kendi Domainini Ekle</h2>
+            
+            <h3>GitHub Pages ile Domain Bağlama</h3>
+            <p>Sitenin varsayılan adresi <strong>websayfa.tr/sitenin-adi</strong> olur. Ama kendi domainini de kullanabilirsin!</p>
+            
+            <h3>Yapılması Gerekenler:</h3>
+            <ol class="step-list">
+                <li>
+                    <span class="step-number">1</span>
+                    Domain sağlayıcısına gir (Namecheap, GoDaddy, vb.)
+                </li>
+                <li>
+                    <span class="step-number">2</span>
+                    DNS ayarlarını aç
+                </li>
+                <li>
+                    <span class="step-number">3</span>
+                    CNAME kaydı ekle:
+                    <div class="code-block">websayfa.tr.github.io</div>
+                </li>
+                <li>
+                    <span class="step-number">4</span>
+                    Değişikliklerin yayılması için 24 saat bekle
+                </li>
+            </ol>
+        </div>
+
+        <!-- Düzenleme -->
+        <div class="guide-section">
+            <h2>5️⃣ Sitenizi Düzenleyin</h2>
+            
+            <h3>Sitenizi Güncellemek</h3>
+            <ol class="step-list">
+                <li>
+                    <span class="step-number">1</span>
+                    Panelime git ve <strong>"Sitelerim"</strong> sayfasından sitenizi seçin
+                </li>
+                <li>
+                    <span class="step-number">2</span>
+                    <strong>"Düzenle"</strong> butonuna tıklayın
+                </li>
+                <li>
+                    <span class="step-number">3</span>
+                    İstediğiniz bilgileri değiştirin (tema, kategori, vb.)
+                </li>
+                <li>
+                    <span class="step-number">4</span>
+                    <strong>"Kaydet"</strong> tıklayın
+                </li>
+                <li>
+                    <span class="step-number">5</span>
+                    Değişiklikler anında yayınlanır! 🎉
+                </li>
+            </ol>
+        </div>
+
+        <!-- Tüm İçerik -->
+        <div class="guide-section">
+            <h2>6️⃣ İçeriklerinizi Yönetin</h2>
+            
+            <p>Her sitede aşağıdaki bölümler bulunur:</p>
+            <ul>
+                <li><strong>Hakkımızda</strong> - Kendiniz/işletmeniz hakkında bilgi</li>
+                <li><strong>Hizmetler</strong> - Sunduğunuz hizmetler</li>
+                <li><strong>İletişim</strong> - İletişim bilgileriniz</li>
+                <li><strong>Diğer İçerikler</strong> - Portföy, blog yazıları, ürünler, vb.</li>
+            </ul>
+        </div>
+
+        <!-- Güvenlik -->
+        <div class="guide-section">
+            <h2>🔐 Güvenlik</h2>
+            
+            <p>Tüm verileriniz şifreli olarak kaydedilir. Platform şunları sağlar:</p>
+            <ul>
+                <li>✅ Şifreli şifre depolaması</li>
+                <li>✅ Güvenli oturum yönetimi</li>
+                <li>✅ Verilerinizi GitHub'da saklama</li>
+                <li>✅ Kişiye özel erişim kontrolü</li>
+            </ul>
+        </div>
+
+        <!-- SSS -->
+        <div class="guide-section">
+            <h2>❓ Sık Sorulan Sorular</h2>
+            
+            <h3>Q: Tamamen ücretsiz mi?</h3>
+            <p>✅ Evet! GitHub Pages sınırsız ücretsiz barındırma sağlar.</p>
+
+            <h3>Q: Başka kişilerin sitelerime erişebilmesini nasıl önlerim?</h3>
+            <p>✅ Panelde "Sitenizi gizle" seçeneği var. Ana sayfada görünmez ama link ile erişilebilir.</p>
+
+            <h3>Q: Veri kaybından korkuyor musunuz?</h3>
+            <p>✅ Hayır! Tüm verileriniz GitHub'da kaydedilir. GitHub'ın yedekleme sistemi var.</p>
+
+            <h3>Q: Mobilde de çalışır mı?</h3>
+            <p>✅ Evet! Tümü responsive tasarımla responsive.</p>
+
+            <h3>Q: Tema değiştirebilir miyim?</h3>
+            <p>✅ Tabii! İstediğin zaman tema seçebilirsin.</p>
+        </div>
+
+        <!-- Destek -->
+        <div class="guide-section">
+            <h2>📞 Destek & İletişim</h2>
+            
+            <p>Sorun mu yaşıyorsunuz? Bize ulaşabilirsiniz:</p>
+            <ul>
+                <li>📧 E-mail: info@websayfa.tr</li>
+                <li>🐙 GitHub: websayfa/tr</li>
+            </ul>
+        </div>
+
+        <a href="index.html" class="back-button" style="margin-top: 2rem;">← Ana Sayfaya Dön</a>
+    </div>
+</body>
+</html>

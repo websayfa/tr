@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - WebSayfa.tr</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <style>
+        .admin-login-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .admin-login-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .admin-login-card h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+
+        .admin-login-card .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .admin-login-card button {
+            width: 100%;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .back-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-login-container">
+        <div class="admin-login-card">
+            <h1>👑 Admin Paneli</h1>
+            <form id="adminLoginForm">
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input type="email" id="adminEmail" required placeholder="admin@websayfa.tr">
+                </div>
+                <div class="form-group">
+                    <label>Şifre</label>
+                    <input type="password" id="adminPassword" required placeholder="•••••••">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Giriş Yap</button>
+            </form>
+            <div class="back-link">
+                <a href="index.html">← Ana Sayfaya Dön</a>
+                <p style="font-size: 0.85rem; margin-top: 1.5rem; color: #666; text-align: center;">
+                    Default: <strong>admin@websayfa.tr</strong> / <strong>admin123</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/i18n.js"></script>
+    <script src="assets/js/crypto.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Admin varsa, panele yönlendir
+            if (authManager && authManager.currentUser && authManager.currentUser.adminPanel) {
+                window.location.href = 'pages/dashboard.html';
+                return;
+            }
+
+            const form = document.getElementById('adminLoginForm');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const email = document.getElementById('adminEmail').value;
+                const password = document.getElementById('adminPassword').value;
+                
+                const hashedPassword = SimpleCrypto.hashPassword(password);
+                
+                // Admin kullanıcısını ara
+                let adminUser = null;
+                for (let userId in authManager.users) {
+                    const user = authManager.users[userId];
+                    if (user.adminPanel && user.email === email && user.password === hashedPassword) {
+                        adminUser = user;
+                        break;
+                    }
+                }
+                
+                if (adminUser) {
+                    authManager.currentUser = adminUser;
+                    authManager.saveUser();
+                    authManager.updateUIState();
+                    window.location.href = 'pages/dashboard.html';
+                } else {
+                    alert('Admin bilgileri hatalı');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

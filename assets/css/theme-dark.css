@@ -1,0 +1,41 @@
+/* TEMA 3: DARK - Koyu ve profesyonel */
+.theme-dark {
+    --primary: #2d3436;
+    --secondary: #636e72;
+    --accent: #00b894;
+}
+
+.theme-dark-preview {
+    background: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
+    color: white;
+}
+
+.theme-dark .site-header {
+    background: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
+    color: #00b894;
+    padding: 2.5rem 2rem;
+    text-align: center;
+}
+
+.theme-dark .site-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #2d3436;
+    color: #dfe6e9;
+}
+
+.theme-dark .section-title {
+    color: #00b894;
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.theme-dark .section-content {
+    background: #353b40;
+    padding: 1.5rem;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+}

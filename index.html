@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSayfa - Ücretsiz Web Sitesi Oluştur</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-brand">
+                    <a href="index.html" class="logo">WebSayfa.tr</a>
+                </div>
+                <div class="navbar-menu">
+                    <a href="index.html" class="nav-link active">Ana Sayfa</a>
+                    <a href="#kategoriler" class="nav-link">Kategoriler</a>
+                    <a href="admin.html" class="nav-link" style="font-size: 0.85rem; opacity: 0.7;">👑</a>
+                    <div class="language-switcher">
+                        <button id="lang-tr" class="lang-btn active">TR</button>
+                        <button id="lang-en" class="lang-btn">EN</button>
+                    </div>
+                    <div id="auth-buttons" class="auth-buttons">
+                        <button class="btn btn-primary" onclick="openLoginModal()">Giriş Yap</button>
+                        <button class="btn btn-secondary" onclick="openRegisterModal()">Kayıt Ol</button>
+                    </div>
+                    <div id="user-menu" class="user-menu" style="display: none;">
+                        <button class="btn btn-primary" onclick="openUserPanel()">Panelim</button>
+                        <button class="btn btn-danger" onclick="logout()">Çıkış</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1 data-i18n="hero.title">Ücretsiz Web Sitenizi Oluşturun</h1>
+                <p data-i18n="hero.subtitle">Kod yazmasına gerek yok, sadece içeriğinizi girin ve yayınlayın!</p>
+                <div style="display: flex; gap: 1rem; justify-content: center;">
+                    <button class="btn btn-large" onclick="openRegisterModal()" data-i18n="hero.btn">Hemen Başla</button>
+                    <a href="guide.html" class="btn btn-large" style="background: transparent; border: 2px solid white; color: white; text-decoration: none;">📖 Rehberi Oku</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kategoriler -->
+        <section id="kategoriler" class="section">
+            <div class="container">
+                <h2 data-i18n="categories.title">Kategoriler</h2>
+                <div class="categories-grid" id="categoriesContainer">
+                    <!-- JavaScript tarafından doldurulacak -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Siteler Listesi -->
+        <section class="section bg-light">
+            <div class="container">
+                <h2 data-i18n="sites.title">Yaratıcı Web Siteleri</h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all" data-i18n="filter.all">Tümü</button>
+                    <button class="filter-btn" data-filter="personal" data-i18n="filter.personal">Kişisel</button>
+                    <button class="filter-btn" data-filter="business" data-i18n="filter.business">İşletme</button>
+                    <button class="filter-btn" data-filter="portfolio" data-i18n="filter.portfolio">Portföy</button>
+                    <button class="filter-btn" data-filter="blog" data-i18n="filter.blog">Blog</button>
+                </div>
+                <div class="sites-grid" id="sitesContainer">
+                    <!-- JavaScript tarafından doldurulacak -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div style="text-align: center;">
+                    <p style="margin-bottom: 1rem;">&copy; 2026 WebSayfa.tr - Tüm hakları saklıdır</p>
+                    <p style="font-size: 0.9rem; color: #666;">
+                        📧 Destek: <strong>kodmatik66@gmail.com</strong> | 
+                        🐙 GitHub: <a href="https://github.com/websayfa/tr.github.io" target="_blank" style="color: inherit; text-decoration: underline;">websayfa/tr.github.io</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2 data-i18n="login.title">Giriş Yap</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label data-i18n="login.email">E-mail</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="login.password">Şifre</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" data-i18n="login.btn">Giriş Yap</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeRegisterModal()">&times;</span>
+            <h2 data-i18n="register.title">Kayıt Ol</h2>
+            
+            <!-- Kayıt Formu -->
+            <form id="registerForm" style="display: block;">
+                <div class="form-group">
+                    <label data-i18n="register.email">E-mail</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Site Adı (Domain)</label>
+                    <div class="domain-input-modal">
+                        <span>websayfa/tr/</span>
+                        <input type="text" id="registerDomain" required placeholder="sitenin-adi" data-i18n-placeholder="register.domain_placeholder">
+                        <span>.github.io</span>
+                    </div>
+                    <small style="display: block; margin-top: 0.5rem; color: #666;">Bu sitenin adı ve domain'i olacak</small>
+                    <small id="domainStatus" style="display: block; margin-top: 0.25rem; color: var(--success);">✅ Kullanılabilir</small>
+                </div>
+                <div class="form-group">
+                    <label>Tema Seçin</label>
+                    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; margin-top: 0.5rem;">
+                        <label style="cursor: pointer; display: flex; flex-direction: column; gap: 0.25rem;">
+                            <input type="radio" name="registerTheme" value="minimal" checked>
+                            <span style="font-size: 0.85rem; text-align: center;">🎨 Minimal</span>
+                        </label>
+                        <label style="cursor: pointer; display: flex; flex-direction: column; gap: 0.25rem;">
+                            <input type="radio" name="registerTheme" value="modern">
+                            <span style="font-size: 0.85rem; text-align: center;">💫 Modern</span>
+                        </label>
+                        <label style="cursor: pointer; display: flex; flex-direction: column; gap: 0.25rem;">
+                            <input type="radio" name="registerTheme" value="dark">
+                            <span style="font-size: 0.85rem; text-align: center;">🌙 Dark</span>
+                        </label>
+                        <label style="cursor: pointer; display: flex; flex-direction: column; gap: 0.25rem;">
+                            <input type="radio" name="registerTheme" value="nature">
+                            <span style="font-size: 0.85rem; text-align: center;">🌿 Nature</span>
+                        </label>
+                        <label style="cursor: pointer; display: flex; flex-direction: column; gap: 0.25rem;">
+                            <input type="radio" name="registerTheme" value="elegant">
+                            <span style="font-size: 0.85rem; text-align: center;">✨ Elegant</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="register.password">Şifre</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="register.password_confirm">Şifre Tekrar</label>
+                    <input type="password" id="registerPasswordConfirm" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" data-i18n="register.btn">Kayıt Ol</button>
+            </form>
+
+            <!-- Doğrulama Formu -->
+            <form id="verificationForm" style="display: none;">
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                    <h3 style="margin: 0 0 0.5rem 0;">E-mail Doğrulama</h3>
+                    <p id="verificationEmail" style="margin: 0; color: #666; font-size: 0.9rem;"></p>
+                </div>
+                <div class="form-group">
+                    <label>Doğrulama Kodu</label>
+                    <p style="font-size: 0.9rem; color: #666; margin: 0 0 0.5rem 0;">E-mail adresine gönderilen 6 haneli kodu giriniz</p>
+                    <input type="text" id="verificationCode" maxlength="6" required placeholder="000000" style="text-align: center; letter-spacing: 0.5rem; font-size: 1.2rem; font-weight: bold;">
+                </div>
+                <small id="verificationTimer" style="display: block; text-align: center; color: #666; margin-top: 0.5rem;">Kod 15 dakika geçerli</small>
+                <button type="submit" class="btn btn-primary btn-block">Doğrula</button>
+                <button type="button" class="btn btn-secondary btn-block" style="margin-top: 0.5rem;" onclick="backToRegisterForm()">Geri Dön</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/index.min.js"></script>
+    <script src="assets/js/i18n.js"></script>
+    <script src="assets/js/crypto.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

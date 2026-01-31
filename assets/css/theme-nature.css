@@ -1,0 +1,42 @@
+/* TEMA 4: NATURE - Doğal ve canlı */
+.theme-nature {
+    --primary: #11998e;
+    --secondary: #38ef7d;
+    --accent: #ffa502;
+}
+
+.theme-nature-preview {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    color: white;
+}
+
+.theme-nature .site-header {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(17, 153, 142, 0.3);
+}
+
+.theme-nature .site-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #f5f5f5;
+}
+
+.theme-nature .section-title {
+    color: #11998e;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 3px solid #38ef7d;
+    padding-bottom: 0.5rem;
+}
+
+.theme-nature .section-content {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid #38ef7d;
+    margin-bottom: 1.5rem;
+}

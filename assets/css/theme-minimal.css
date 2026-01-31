@@ -1,0 +1,30 @@
+/* TEMA 1: MINIMAL - Sade ve temiz */
+.theme-minimal {
+    --primary: #667eea;
+    --secondary: #764ba2;
+    --accent: #f093fb;
+}
+
+.theme-minimal-preview {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.theme-minimal .site-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+}
+
+.theme-minimal .site-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.theme-minimal .section-title {
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}

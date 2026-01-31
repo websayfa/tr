@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Önizlemesi</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/theme-minimal.css">
+    <link rel="stylesheet" href="../assets/css/theme-modern.css">
+    <link rel="stylesheet" href="../assets/css/theme-dark.css">
+    <link rel="stylesheet" href="../assets/css/theme-nature.css">
+    <link rel="stylesheet" href="../assets/css/theme-elegant.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+        }
+
+        .site-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .site-navbar {
+            background: rgba(0, 0, 0, 0.05);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-navbar-left {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .back-btn {
+            background: transparent;
+            border: none;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .site-navbar-right {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .lang-switcher-small {
+            display: flex;
+            gap: 0.3rem;
+        }
+
+        .lang-btn-small {
+            padding: 0.4rem 0.6rem;
+            border: 1px solid #ccc;
+            background: white;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .lang-btn-small.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Header */
+        .site-header {
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            color: white;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .site-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .site-header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Container */
+        .site-main {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 2rem;
+        }
+
+        .site-section {
+            padding: 3rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .site-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .section-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Contact Section */
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .contact-link:hover {
+            background: var(--secondary);
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .site-footer {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            text-align: center;
+            color: var(--dark);
+            border-top: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .footer-link:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Controls */
+        .site-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            max-width: 220px;
+        }
+
+        .controls-title {
+            margin: 0 0 1rem 0;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .theme-buttons {
+            display: flex;
+            gap: 0.3rem;
+            flex-wrap: wrap;
+        }
+
+        .theme-btn {
+            padding: 0.4rem 0.6rem;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .theme-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .theme-btn:hover {
+            border-color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .site-header h1 {
+                font-size: 2rem;
+            }
+
+            .site-header {
+                min-height: 200px;
+                padding: 2rem 1rem;
+            }
+
+            .site-navbar {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .site-main {
+                padding: 0 1rem;
+            }
+
+            .site-section {
+                padding: 2rem 0;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .site-controls {
+                bottom: 10px;
+                right: 10px;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="site-wrapper">
+        <!-- Navigation -->
+        <nav class="site-navbar">
+            <div class="site-navbar-left">
+                <button class="back-btn" onclick="window.location.href='../index.html'">← Geri</button>
+            </div>
+            <div class="site-navbar-right">
+                <div class="lang-switcher-small">
+                    <button class="lang-btn-small active" data-lang="tr">TR</button>
+                    <button class="lang-btn-small" data-lang="en">EN</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Header -->
+        <header class="site-header" id="siteHeader">
+            <h1 id="headerTitle">Site Başlığı</h1>
+            <p class="subtitle" id="headerSubtitle">Site açıklaması</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="site-main" id="siteContent">
+            <!-- Sections will be rendered here -->
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-links" id="footerLinks">
+                    <a href="#anasayfa" class="footer-link" data-i18n="footer.home">Ana Sayfa</a>
+                    <a href="#hizmetler" class="footer-link" data-i18n="footer.services">Hizmetler</a>
+                    <a href="#iletisim" class="footer-link" data-i18n="footer.contact">İletişim</a>
+                </div>
+                <p class="footer-text" id="footerText">© 2026 WebSayfa.tr - Tüm hakları saklıdır</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Theme Controls -->
+    <div class="site-controls">
+        <h4 class="controls-title">🎨 Tema Seç:</h4>
+        <div class="theme-buttons">
+            <button class="theme-btn active" data-theme="minimal">Min</button>
+            <button class="theme-btn" data-theme="modern">Mod</button>
+            <button class="theme-btn" data-theme="dark">Dark</button>
+            <button class="theme-btn" data-theme="nature">Nat</button>
+            <button class="theme-btn" data-theme="elegant">Ele</button>
+        </div>
+    </div>
+
+    <script src="../assets/js/crypto.js"></script>
+    <script>
+        let currentLang = localStorage.getItem('language') || 'tr';
+        let currentTheme = 'minimal';
+        let currentSite = null;
+
+        // Demo Siteler (Enhanced)
+        const DEMO_SITES = [
+            {
+                id: 'demo1',
+                title: 'Grafik Tasarımcı',
+                titleEn: 'Graphic Designer',
+                theme: 'minimal',
+                icon: '🎨',
+                description: 'Profesyonel portföy sitesi',
+                descriptionEn: 'Professional portfolio website',
+                content: {
+                    about: {
+                        tr: 'Grafik Tasarım Hakkımızda',
+                        en: 'About Graphic Design'
+                    },
+                    aboutDesc: {
+                        tr: 'Grafik tasarım alanında 5 yıllık deneyime sahibim. Logo tasarımı, marka kimliği ve web tasarım alanında uzmanlaşmış bir profesyonelim. Her projede yaratıcılık ve kaliteyi bir araya getiririm.',
+                        en: 'I have 5 years of experience in graphic design. I am a professional specialized in logo design, brand identity and web design. I combine creativity and quality in every project.'
+                    },
+                    services: {
+                        tr: 'Hizmetlerimiz',
+                        en: 'Our Services'
+                    },
+                    servicesList: {
+                        tr: ['Logo Tasarımı', 'Marka Kimliği', 'Web Tasarımı', 'İçerik Tasarımı'],
+                        en: ['Logo Design', 'Brand Identity', 'Web Design', 'Content Design']
+                    },
+                    contact: {
+                        tr: 'İletişim',
+                        en: 'Contact'
+                    },
+                    email: 'designer@example.com',
+                    phone: '+90 555 123 4567',
+                    whatsapp: '+905551234567'
+                }
+            },
+            {
+                id: 'demo2',
+                title: 'Yazılım Geliştirici',
+                titleEn: 'Software Developer',
+                theme: 'modern',
+                icon: '💻',
+                description: 'Modern portföy sitesi',
+                descriptionEn: 'Modern portfolio website',
+                content: {
+                    about: {
+                        tr: 'Yazılım Geliştirme Hakkımızda',
+                        en: 'About Software Development'
+                    },
+                    aboutDesc: {
+                        tr: 'Full-stack developer olarak web ve mobil uygulamalar geliştiriyorum. JavaScript, Python, React, Node.js ve daha birçok teknoloji ile çalışıyorum. Kaliteli ve ölçeklenebilir yazılım çözümleri sunmaktayım.',
+                        en: 'As a full-stack developer, I develop web and mobile applications. I work with JavaScript, Python, React, Node.js and many other technologies. I provide high-quality and scalable software solutions.'
+                    },
+                    services: {
+                        tr: 'Hizmetlerimiz',
+                        en: 'Our Services'
+                    },
+                    servicesList: {
+                        tr: ['Web Geliştirme', 'Mobil Uygulamalar', 'API Geliştirme', 'Danışmanlık'],
+                        en: ['Web Development', 'Mobile Apps', 'API Development', 'Consulting']
+                    },
+                    contact: {
+                        tr: 'İletişim',
+                        en: 'Contact'
+                    },
+                    email: 'dev@example.com',
+                    phone: '+90 555 987 6543',
+                    whatsapp: '+905559876543'
+                }
+            },
+            {
+                id: 'demo3',
+                title: 'Teknoloji Blogu',
+                titleEn: 'Tech Blog',
+                theme: 'dark',
+                icon: '📱',
+                description: 'Güncel teknoloji haberleri',
+                descriptionEn: 'Latest technology news',
+                content: {
+                    about: {
+                        tr: 'Blog Hakkımızda',
+                        en: 'About Our Blog'
+                    },
+                    aboutDesc: {
+                        tr: 'En son teknoloji trendlerini takip edin. Yapay zeka, web teknolojileri, siber güvenlik ve daha birçok konuda yazılarımız bulunmaktadır. Her hafta yeni içerikler ekliyoruz.',
+                        en: 'Follow the latest technology trends. We have articles on artificial intelligence, web technologies, cybersecurity and much more. We add new content every week.'
+                    },
+                    posts: {
+                        tr: 'Son Yazılar',
+                        en: 'Latest Posts'
+                    },
+                    postsList: {
+                        tr: ['Yapay Zeka Nedir?', 'Web 3.0 Rehberi', 'Siber Güvenlik İpuçları'],
+                        en: ['What is AI?', 'Web 3.0 Guide', 'Cybersecurity Tips']
+                    },
+                    contact: {
+                        tr: 'İletişim',
+                        en: 'Contact'
+                    },
+                    email: 'blog@example.com',
+                    phone: '+90 555 111 2222',
+                    whatsapp: '+905551112222'
+                }
+            },
+            {
+                id: 'demo4',
+                title: 'Danışmanlık Firması',
+                titleEn: 'Consulting Firm',
+                theme: 'elegant',
+                icon: '📊',
+                description: 'Kurumsal web sitesi',
+                descriptionEn: 'Corporate website',
+                content: {
+                    about: {
+                        tr: 'Hakkımızda',
+                        en: 'About Us'
+                    },
+                    aboutDesc: {
+                        tr: 'İşletme danışmanlığında uzmanlaşmış bir firma. Strateji geliştirme, operasyon optimizasyonu ve dijital dönüşüm alanında hizmet vermekteyiz. 100+ şirkete danışmanlık hizmeti sağlamışız.',
+                        en: 'A firm specialized in business consulting. We provide services in strategy development, operational optimization and digital transformation. We have provided consulting services to 100+ companies.'
+                    },
+                    services: {
+                        tr: 'Hizmetlerimiz',
+                        en: 'Our Services'
+                    },
+                    servicesList: {
+                        tr: ['Strateji Geliştirme', 'Operasyon Optimizasyonu', 'Dijital Dönüşüm', 'Eğitim'],
+                        en: ['Strategy Development', 'Operations Optimization', 'Digital Transformation', 'Training']
+                    },
+                    contact: {
+                        tr: 'İletişim',
+                        en: 'Contact'
+                    },
+                    email: 'info@consulting.com',
+                    phone: '+90 555 444 5555',
+                    whatsapp: '+905554445555'
+                }
+            },
+            {
+                id: 'demo5',
+                title: 'Online Mağazası',
+                titleEn: 'Online Store',
+                theme: 'nature',
+                icon: '🛍️',
+                description: 'Organik ürünler satış sitesi',
+                descriptionEn: 'Organic products sales website',
+                content: {
+                    about: {
+                        tr: 'Hakkımızda',
+                        en: 'About Us'
+                    },
+                    aboutDesc: {
+                        tr: '100% doğal ve organik ürünler sunuyoruz. Tüm ürünlerimiz kimyasallardan arındırılmış ve çevre dostu şekilde üretilmektedir. Sağlığınız ve doğa için en iyi seçim.',
+                        en: 'We offer 100% natural and organic products. All our products are free from chemicals and produced in an environmentally friendly manner. The best choice for your health and nature.'
+                    },
+                    products: {
+                        tr: 'Ürünlerimiz',
+                        en: 'Our Products'
+                    },
+                    productsList: {
+                        tr: ['Organik Meyveler', 'Sebzeler', 'Baharatlar', 'Bal ve Reçeller'],
+                        en: ['Organic Fruits', 'Vegetables', 'Spices', 'Honey and Jams']
+                    },
+                    contact: {
+                        tr: 'İletişim',
+                        en: 'Contact'
+                    },
+                    email: 'shop@example.com',
+                    phone: '+90 555 666 7777',
+                    whatsapp: '+905556667777'
+                }
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSite();
+            setupLanguageSwitcher();
+            setupThemeSwitcher();
+        });
+
+        function loadSite() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const siteId = urlParams.get('id');
+            
+            currentSite = DEMO_SITES.find(s => s.id === siteId);
+            
+            if (!currentSite) {
+                document.getElementById('siteContent').innerHTML = '<p style="padding: 2rem; text-align: center;">Site bulunamadı</p>';
+                return;
+            }
+
+            currentTheme = currentSite.theme || 'minimal';
+            renderSite();
+        }
+
+        function renderSite() {
+            const site = currentSite;
+            const themeClass = `theme-${site.theme}`;
+            
+            // Apply theme
+            document.body.className = themeClass;
+            
+            // Header
+            document.getElementById('headerTitle').textContent = currentLang === 'tr' ? site.title : site.titleEn;
+            document.getElementById('headerSubtitle').textContent = currentLang === 'tr' ? site.description : site.descriptionEn;
+            
+            // Content
+            let mainHTML = '';
+            const content = site.content;
+            
+            // About Section
+            mainHTML += `
+                <section class="site-section">
+                    <h2 class="section-title">${content.about[currentLang]}</h2>
+                    <div class="section-content">
+                        <p>${content.aboutDesc[currentLang]}</p>
+                    </div>
+                </section>
+            `;
+            
+            // Services/Products Section
+            const serviceName = content.services ? content.services[currentLang] : 'Hizmetler';
+            const serviceList = content.servicesList || content.productsList;
+            
+            if (serviceList) {
+                mainHTML += `
+                    <section class="site-section">
+                        <h2 class="section-title">${serviceName}</h2>
+                        <div class="section-grid">
+                            ${serviceList[currentLang].map((item, i) => `
+                                <div class="section-card">
+                                    <div class="card-icon">${['🎯', '⭐', '🚀', '💡'][i % 4]}</div>
+                                    <div class="card-title">${item}</div>
+                                    <div class="card-desc">Profesyonel ${item.toLowerCase()} hizmeti</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </section>
+                `;
+            }
+            
+            // Contact Section
+            const contactTitle = content.contact[currentLang];
+            const ctaText = currentLang === 'tr' ? 'Bize Ulaş' : 'Contact Us';
+            
+            mainHTML += `
+                <section class="site-section">
+                    <h2 class="section-title">${contactTitle}</h2>
+                    <div class="contact-methods">
+                        <div class="contact-card">
+                            <div class="contact-icon">📧</div>
+                            <h3>${currentLang === 'tr' ? 'E-mail' : 'Email'}</h3>
+                            <a href="mailto:${content.email}" class="contact-link">${ctaText}</a>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">📞</div>
+                            <h3>${currentLang === 'tr' ? 'Telefon' : 'Phone'}</h3>
+                            <a href="tel:${content.phone}" class="contact-link">${ctaText}</a>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">💬</div>
+                            <h3>WhatsApp</h3>
+                            <a href="https://wa.me/${content.whatsapp}?text=Merhaba" target="_blank" class="contact-link">WhatsApp</a>
+                        </div>
+                    </div>
+                </section>
+            `;
+            
+            document.getElementById('siteContent').innerHTML = mainHTML;
+        }
+
+        function setupLanguageSwitcher() {
+            document.querySelectorAll('.lang-btn-small').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.lang-btn-small').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentLang = btn.dataset.lang;
+                    localStorage.setItem('language', currentLang);
+                    renderSite();
+                });
+            });
+        }
+
+        function setupThemeSwitcher() {
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentSite.theme = btn.dataset.theme;
+                    currentTheme = btn.dataset.theme;
+                    renderSite();
+                });
+            });
+        }
+
+        // Footer bilgisi
+        console.log('🌐 WebSayfa.tr - Destek: kodmatik66@gmail.com');
+        console.log('📚 Rehber: Sayfada "Rehberi Oku" linkine tıklayınız');
+    </script>
+</body>
+</html>

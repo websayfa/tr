@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - WebSayfa.tr</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>WebSayfa.tr</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="#" class="menu-item active" data-page="sites">
+                    <span class="menu-icon">📱</span>
+                    <span class="menu-label">Sitelerim</span>
+                </a>
+                <a href="#" class="menu-item" data-page="create">
+                    <span class="menu-icon">➕</span>
+                    <span class="menu-label">Yeni Site</span>
+                </a>
+                <a href="#" class="menu-item" data-page="domains">
+                    <span class="menu-icon">🌐</span>
+                    <span class="menu-label">Domainler</span>
+                </a>
+                <a href="#" class="menu-item" data-page="settings">
+                    <span class="menu-icon">⚙️</span>
+                    <span class="menu-label">Ayarlar</span>
+                </a>
+                <a href="#" class="menu-item" data-page="admin" id="adminLink" style="display: none;">
+                    <span class="menu-icon">👑</span>
+                    <span class="menu-label">Admin Panel</span>
+                </a>
+                <button class="menu-item logout-btn" onclick="logoutFromDashboard()">
+                    <span class="menu-icon">🚪</span>
+                    <span class="menu-label">Çıkış</span>
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <div id="userInfo"></div>
+                <p style="font-size: 0.75rem; color: #999; margin-top: 1rem; text-align: center; border-top: 1px solid #e0e0e0; padding-top: 1rem;">
+                    📧 Destek:<br>
+                    <strong style="color: #666;">kodmatik66@gmail.com</strong>
+                </p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Sites Page -->
+            <section id="sites-page" class="page active">
+                <div class="page-header">
+                    <h1>Sitelerim</h1>
+                    <button class="btn btn-primary" onclick="goToPage('create')">Yeni Site Oluştur</button>
+                </div>
+                <div id="sitesList" class="sites-list">
+                    <!-- JavaScript tarafından doldurulacak -->
+                </div>
+            </section>
+
+            <!-- Create Site Page -->
+            <section id="create-page" class="page">
+                <div class="page-header">
+                    <h1>Yeni Site Oluştur</h1>
+                </div>
+                <form id="createSiteForm" class="form-large">
+                    <div class="form-group">
+                        <label>Site Adı</label>
+                        <input type="text" id="siteName" required placeholder="Örn: Benim İşletmem">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Kategori</label>
+                            <select id="siteCategory" required>
+                                <option value="">Seç...</option>
+                                <option value="personal">Kişisel</option>
+                                <option value="business">İşletme</option>
+                                <option value="portfolio">Portföy</option>
+                                <option value="blog">Blog</option>
+                                <option value="ecommerce">E-Ticaret</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Tema</label>
+                            <select id="siteTheme" required>
+                                <option value="">Seç...</option>
+                                <option value="minimal">Minimal</option>
+                                <option value="modern">Modern</option>
+                                <option value="dark">Dark</option>
+                                <option value="nature">Nature</option>
+                                <option value="elegant">Elegant</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Domain Adı (sadece harfler ve sayılar)</label>
+                        <div class="domain-input">
+                            <span style="background: #f0f0f0; padding: 0.75rem; border-radius: 4px 0 0 4px; border-right: 1px solid #ddd;">websayfa/tr/</span>
+                            <input type="text" id="siteDomain" required placeholder="sitenin-adi" style="border-radius: 0;">
+                            <span style="background: #f0f0f0; padding: 0.75rem; border-radius: 0 4px 4px 0; border-left: 1px solid #ddd;">.github.io</span>
+                        </div>
+                        <small style="display: block; margin-top: 0.5rem; color: #666;">Örnek: websayfa/tr/<strong>benim-site</strong>.github.io</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Açıklama</label>
+                        <textarea id="siteDescription" rows="4" placeholder="Site hakkında kısa açıklama..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="sitePublic" checked>
+                            Ana sayfada göster
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-large">Site Oluştur</button>
+                </form>
+            </section>
+
+            <!-- Domains Page -->
+            <section id="domains-page" class="page">
+                <div class="page-header">
+                    <h1>Domain Yönetimi</h1>
+                </div>
+                <div class="domains-container">
+                    <div class="domains-info">
+                        <h3>Kendi Domainini Yönlendir</h3>
+                        <p>GitHub Pages ile kendi domainini kullanabilirsin.</p>
+                        <div class="domain-setup">
+                            <h4>URL Yapısı:</h4>
+                            <code style="background: white; padding: 1rem; display: block; border-radius: 4px; border-left: 3px solid var(--primary); margin: 1rem 0;">
+                                websayfa/tr/<strong>[DOMAIN-ADIN]</strong>.github.io
+                            </code>
+                            <h4 style="margin-top: 1.5rem;">Örnek:</h4>
+                            <code style="background: white; padding: 1rem; display: block; border-radius: 4px; border-left: 3px solid var(--secondary);">
+                                websayfa/tr/<strong>benim-isletme</strong>.github.io
+                            </code>
+                            <h4 style="margin-top: 1.5rem;">Kendi Domainini Bağlamak İçin:</h4>
+                            <ol style="padding-left: 2rem;">
+                                <li>Domain sağlayıcısında DNS ayarlarını aç</li>
+                                <li>CNAME kaydı ekle: <code>websayfa.tr.github.io</code></li>
+                                <li>Waiting for DNS (24 saat kadar)</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div id="domainsList" class="domains-list">
+                        <!-- JavaScript tarafından doldurulacak -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Page -->
+            <section id="settings-page" class="page">
+                <div class="page-header">
+                    <h1>Ayarlar</h1>
+                </div>
+                <div class="settings-container">
+                    <div class="settings-section">
+                        <h3>Profil Ayarları</h3>
+                        <form id="settingsForm">
+                            <div class="form-group">
+                                <label>Kullanıcı Adı</label>
+                                <input type="text" id="settingsUsername" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label>E-mail</label>
+                                <input type="email" id="settingsEmail" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label>Yeni Şifre (değiştirmek isterseniz)</label>
+                                <input type="password" id="newPassword" placeholder="Boş bırakırsa değiştirilmez">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Güncelle</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Admin Panel Page -->
+            <section id="admin-page" class="page">
+                <div class="page-header">
+                    <h1>Admin Panel</h1>
+                </div>
+                <div class="admin-container">
+                    <div class="admin-section">
+                        <h3>Tüm Kullanıcılar</h3>
+                        <div id="allUsersList" class="users-list">
+                            <!-- JavaScript tarafından doldurulacak -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close" onclick="closeEditModal()">&times;</span>
+            <h2>Siteyi Düzenle</h2>
+            <form id="editSiteForm">
+                <input type="hidden" id="editSiteId">
+                
+                <div class="form-group">
+                    <label>Site Adı</label>
+                    <input type="text" id="editSiteName" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Kategori</label>
+                        <select id="editSiteCategory" required>
+                            <option value="personal">Kişisel</option>
+                            <option value="business">İşletme</option>
+                            <option value="portfolio">Portföy</option>
+                            <option value="blog">Blog</option>
+                            <option value="ecommerce">E-Ticaret</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tema</label>
+                        <select id="editSiteTheme" required>
+                            <option value="minimal">Minimal</option>
+                            <option value="modern">Modern</option>
+                            <option value="dark">Dark</option>
+                            <option value="nature">Nature</option>
+                            <option value="elegant">Elegant</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Açıklama</label>
+                    <textarea id="editSiteDescription" rows="4"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="editSitePublic">
+                        Ana sayfada göster
+                    </label>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                    <button type="button" class="btn btn-danger" onclick="deleteSite()">Sil</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/i18n.js"></script>
+    <script src="../assets/js/crypto.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+/* TEMA 5: ELEGANT - Zarif ve sofistike */
+.theme-elegant {
+    --primary: #d4a574;
+    --secondary: #a8b8c8;
+    --accent: #6c5b4f;
+}
+
+.theme-elegant-preview {
+    background: linear-gradient(135deg, #d4a574 0%, #a8b8c8 100%);
+    color: white;
+}
+
+.theme-elegant .site-header {
+    background: linear-gradient(135deg, #d4a574 0%, #a8b8c8 100%);
+    color: white;
+    padding: 4rem 2rem;
+    text-align: center;
+    border-bottom: 2px solid #6c5b4f;
+}
+
+.theme-elegant .site-header h1 {
+    font-family: 'Georgia', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.theme-elegant .site-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    background: #faf7f2;
+}
+
+.theme-elegant .section-title {
+    font-family: 'Georgia', serif;
+    color: #6c5b4f;
+    font-size: 1.8rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    border-top: 2px solid #d4a574;
+    border-bottom: 2px solid #d4a574;
+    padding: 1rem 0;
+}
+
+.theme-elegant .section-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
