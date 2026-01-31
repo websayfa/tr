@@ -72,21 +72,37 @@ class AuthManager {
             return false;
         }
 
+        // Sistem ayarlarını kontrol et - onaylama gerekli mi?
+        const siteSettings = JSON.parse(localStorage.getItem('siteSettings') || '{}');
+        const requireApproval = siteSettings.requireApproval || false;
+
         const user = {
             id: Date.now().toString(),
             username: username,
             email: email,
-            domain: domain, // Site domain'i
+            domain: domain,
             password: SimpleCrypto.hashPassword(password),
             createdAt: new Date().toISOString(),
             sites: [],
             isPublic: true,
             adminPanel: false,
-            isSuperAdmin: false  // Super admin bayrağı (sadece admin panel'den ayarlanabilir)
+            isSuperAdmin: false,
+            approved: !requireApproval // Eğer onaylama gerekli ise approved = false
         };
 
-        this.users[user.id] = user;
-        this.saveUsers();
+        // Eğer onaylama gerekli ise pending users'a ekle
+        if (requireApproval) {
+            const pendingUsers = JSON.parse(localStorage.getItem('pendingUsers') || '[]');
+            pendingUsers.push(user);
+            localStorage.setItem('pendingUsers', JSON.stringify(pendingUsers));
+            alert('Kayıt başarılı! Kaydınız admin tarafından onay beklemektedir. Onaylama sonrasında siteyi oluşturabilirsiniz.');
+            return true;
+        }
+
+        // Onaylama gerekmiyorsa direkt users'a ekle
+        const userList = JSON.parse(localStorage.getItem('users') || '[]');
+        userList.push(user);
+        localStorage.setItem('users', JSON.stringify(userList));
 
         // Otomatik olarak ilk siteyi seçilen tema ile oluştur
         const defaultSite = {
@@ -95,7 +111,7 @@ class AuthManager {
             userId: user.id,
             title: domain.replace(/-/g, ' ').charAt(0).toUpperCase() + domain.replace(/-/g, ' ').slice(1),
             category: 'personal',
-            theme: theme, // Seçilen tema
+            theme: theme,
             domain: domain,
             description: 'Hoş geldiniz!',
             isPublic: true,
@@ -108,17 +124,11 @@ class AuthManager {
             }
         };
 
-        user.sites.push(defaultSite.id);
-        this.saveUsers();
-
-        // Siteyi localStorage'a kaydet
-        const allSites = this.loadAllSites();
-        allSites.push(defaultSite);
-        localStorage.setItem('allSites', SimpleCrypto.encryptObject(allSites));
+        user.sites = [defaultSite.id];
 
         // Kullanıcıyı otomatik login yap
         this.currentUser = user;
-        this.saveUser();
+        localStorage.setItem('currentUser', JSON.stringify(user));
         this.updateUIState();
 
         alert('Kayıt başarılı! Siteniz oluşturuldu. Panele yönlendiriliyorsunuz...');
@@ -218,13 +228,28 @@ class AuthManager {
             return false;
         }
 
-        const hashedPassword = SimpleCrypto.hashPassword(password);
+        // Önce pending users'da kontrol et
+        const pendingUsers = JSON.parse(localStorage.getItem('pendingUsers') || '[]');
+        const isPending = pendingUsers.some(u => u.email === email);
+        
+        if (isPending) {
+            alert('❌ Kaydınız henüz admin tarafından onaylanmamıştır. Lütfen onaylama işlemini bekleyin.');
+            return false;
+        }
 
-        for (let userId in this.users) {
-            const user = this.users[userId];
+        const hashedPassword = SimpleCrypto.hashPassword(password);
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+        for (let user of users) {
             if (user.email === email && user.password === hashedPassword) {
+                // Bannedsa giriş yapmasın
+                if (user.banned) {
+                    alert('❌ Hesabınız banlanmıştır. Daha fazla bilgi için destek ekibiyle iletişime geçin.');
+                    return false;
+                }
+
                 this.currentUser = user;
-                this.saveUser();
+                localStorage.setItem('currentUser', JSON.stringify(user));
                 this.updateUIState();
                 console.log('✅ Giriş başarılı:', email);
                 alert('✅ Giriş başarılı! Panele yönlendiriliyorsunuz...');

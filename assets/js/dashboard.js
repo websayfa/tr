@@ -240,9 +240,10 @@ function setupCreateSiteForm() {
             return;
         }
 
-        // Site limiti kontrolü (Super admin sınırsız, normal kullanıcı 1)
+        // Site limiti kontrolü
         const isSuperAdmin = authManager.currentUser && authManager.currentUser.isSuperAdmin === true;
-        const userSiteLimit = isSuperAdmin ? Infinity : 1;
+        const settings = JSON.parse(localStorage.getItem('siteSettings') || '{}');
+        const userSiteLimit = isSuperAdmin ? Infinity : (settings.userSiteLimit || 1);
         
         if (siteManager.sites.length >= userSiteLimit) {
             alert(`Maksimum ${userSiteLimit} site oluşturabilirsiniz. Yeni site oluşturmak için bir siteyi silmelisiniz.`);
