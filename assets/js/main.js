@@ -325,6 +325,10 @@ function setupFilterButtons() {
     });
 }
 
+// Global olarak export et
+window.DEMO_SITES = DEMO_SITES;
+window.THEMES = THEMES;
+
 // Siteleri filtrele
 function filterSites(category) {
     const cards = document.querySelectorAll('.site-card');
