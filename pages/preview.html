@@ -442,12 +442,16 @@
         });
 
         function loadSite() {
+            console.log('loadSite() çalışıyor');
             const urlParams = new URLSearchParams(window.location.search);
             const siteId = urlParams.get('id');
+            console.log('siteId:', siteId);
             
             // Önce DEMO_SITES'te ara (main.js'den)
             const demoSites = window.DEMO_SITES || [];
+            console.log('window.DEMO_SITES:', demoSites.length, 'site bulundu');
             currentSite = demoSites.find(s => s.id === siteId);
+            console.log('currentSite bulundu:', !!currentSite);
             
             // Eğer bulunamazsa, localStorage'dan kullanıcı sitesini ara
             if (!currentSite) {
@@ -507,6 +511,7 @@
         }
 
         function renderSite() {
+            console.log('renderSite() çalışıyor, currentSite:', currentSite);
             const site = currentSite;
             const themeClass = `theme-${site.theme}`;
             
