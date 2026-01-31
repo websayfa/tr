@@ -110,6 +110,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('adminLink').style.display = 'flex';
     }
 
+    // Super Admin link'i göster (eğer super admin ise)
+    if (authManager.currentUser.isSuperAdmin) {
+        document.getElementById('superadminLink').style.display = 'flex';
+    }
+
     // Sayfa navigasyonunu ayarla
     setupNavigation();
 
