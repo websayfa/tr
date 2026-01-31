@@ -20,17 +20,13 @@ class AuthManager {
 
     // Admin varsa kontrol et, yoksa oluştur
     initializeAdminIfNeeded() {
-        // Admin aradığım kontrol et
-        let adminExists = false;
-        for (let userId in this.users) {
-            if (this.users[userId].adminPanel === true) {
-                adminExists = true;
-                break;
-            }
-        }
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+        
+        // Admin aradığını kontrol et
+        let adminExists = users.some(u => u.adminPanel === true);
 
-        // Eğer admin yoksa, ilk kullanıcı admin olsun
-        if (!adminExists && Object.keys(this.users).length === 0) {
+        // Eğer admin yoksa, ilk admin oluştur
+        if (!adminExists) {
             const adminUser = {
                 id: 'admin_' + Date.now(),
                 username: 'admin',
@@ -40,11 +36,11 @@ class AuthManager {
                 sites: [],
                 isPublic: false,
                 adminPanel: true,
-                isSuperAdmin: true  // İlk admin super admin
+                isSuperAdmin: true
             };
-            this.users[adminUser.id] = adminUser;
-            this.saveUsers();
-            console.log('Admin hesabı oluşturuldu: admin@websayfa.tr / admin123 (Super Admin)');
+            users.push(adminUser);
+            localStorage.setItem('users', JSON.stringify(users));
+            console.log('✅ Admin hesabı oluşturuldu: admin@websayfa.tr / admin123 (Super Admin)');
         }
     }
 
