@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="../assets/css/theme-dark.css">
     <link rel="stylesheet" href="../assets/css/theme-nature.css">
     <link rel="stylesheet" href="../assets/css/theme-elegant.css">
+    <link rel="stylesheet" href="../assets/css/theme-classic.css">
+    <link rel="stylesheet" href="../assets/css/theme-agency.css">
+    <link rel="stylesheet" href="../assets/css/theme-startup.css">
+    <link rel="stylesheet" href="../assets/css/theme-corporate.css">
+    <link rel="stylesheet" href="../assets/css/theme-vibrant.css">
     <style>
         * {
             margin: 0;
@@ -375,7 +380,7 @@
         <!-- Navigation -->
         <nav class="site-navbar">
             <div class="site-navbar-left">
-                <button class="back-btn" onclick="window.location.href='../index.html'">← Geri</button>
+                <button class="back-btn" onclick="window.location.href='../index.html'" data-i18n="preview.back">← Geri</button>
             </div>
             <div class="site-navbar-right">
                 <div class="lang-switcher-small">
@@ -422,6 +427,8 @@
     </div>
 
     <script src="../assets/js/crypto.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/i18n.js"></script>
     <script>
         let currentLang = localStorage.getItem('language') || 'tr';
         let currentTheme = 'minimal';
