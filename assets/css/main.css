@@ -186,6 +186,63 @@ body {
     opacity: 0.9;
 }
 
+/* Hero variants for themes */
+.hero.variant-modern {
+    padding: 8rem 0 6rem;
+    text-align: left;
+    background: linear-gradient(90deg, rgba(0,0,0,0.35), rgba(0,0,0,0.1)), url('../images/hero-modern.jpg') center/cover no-repeat;
+}
+.hero.variant-modern .hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    color: white;
+}
+
+.hero.variant-classic {
+    background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+    color: var(--dark);
+    padding: 4rem 0;
+}
+
+.hero.variant-minimal {
+    background: none;
+    color: var(--dark);
+    padding: 3rem 0;
+}
+
+.hero.variant-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+    padding: 6rem 0;
+}
+
+.hero .hero-cta {
+    margin-top: 1.5rem;
+}
+
+/* Simple responsive hamburger */
+.navbar .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+}
+.navbar .hamburger span {
+    width: 22px;
+    height: 3px;
+    background: white;
+    display: block;
+    border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+    .navbar .navbar-menu { display: none; }
+    .navbar .hamburger { display: flex; }
+    .hero.variant-split { grid-template-columns: 1fr; text-align: center; }
+}
+
 /* Sections */
 .section {
     padding: 4rem 0;

@@ -773,9 +773,60 @@
             // Apply theme
             document.body.className = themeClass;
             
-            // Header
-            document.getElementById('headerTitle').textContent = currentLang === 'tr' ? site.title : site.titleEn;
-            document.getElementById('headerSubtitle').textContent = currentLang === 'tr' ? site.description : site.descriptionEn;
+            // Header / Hero - render variant based on theme
+            const titleText = currentLang === 'tr' ? site.title : site.titleEn;
+            const subtitleText = currentLang === 'tr' ? site.description : site.descriptionEn;
+
+            let headerHTML = '';
+            switch (site.theme) {
+                case 'modern':
+                    headerHTML = `
+                        <header class="hero variant-modern">
+                            <div class="hero-inner container">
+                                <h1 id="headerTitle">${titleText}</h1>
+                                <p id="headerSubtitle">${subtitleText}</p>
+                                <div class="hero-cta">
+                                    <a href="#siteContent" class="btn btn-large btn-primary">${currentLang === 'tr' ? 'Hemen İncele' : 'Explore'}</a>
+                                </div>
+                            </div>
+                        </header>
+                    `;
+                    break;
+                case 'dark':
+                    headerHTML = `
+                        <header class="hero variant-split">
+                            <div>
+                                <h1 id="headerTitle">${titleText}</h1>
+                                <p id="headerSubtitle">${subtitleText}</p>
+                            </div>
+                            <div>
+                                <img src="../assets/images/demo-${site.id}.jpg" alt="${titleText}" style="width:100%;border-radius:8px;box-shadow:var(--shadow);">
+                            </div>
+                        </header>
+                    `;
+                    break;
+                case 'elegant':
+                    headerHTML = `
+                        <header class="hero variant-classic">
+                            <div class="container">
+                                <h1 id="headerTitle">${titleText}</h1>
+                                <p id="headerSubtitle">${subtitleText}</p>
+                            </div>
+                        </header>
+                    `;
+                    break;
+                default:
+                    headerHTML = `
+                        <header class="hero variant-minimal">
+                            <div class="container">
+                                <h1 id="headerTitle">${titleText}</h1>
+                                <p id="headerSubtitle">${subtitleText}</p>
+                            </div>
+                        </header>
+                    `;
+            }
+
+            document.getElementById('siteHeader').innerHTML = headerHTML;
             
             // Content
             let mainHTML = '';
