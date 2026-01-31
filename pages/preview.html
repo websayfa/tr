@@ -436,12 +436,17 @@
         let currentSite = null;
 
         document.addEventListener('DOMContentLoaded', () => {
-            // main.js yüklenmesini bekle
-            setTimeout(() => {
-                loadSite();
-                setupLanguageSwitcher();
-                setupThemeSwitcher();
-            }, 100);
+            // DEMO_SITES yüklenene kadar bekle
+            function waitForDEMOSITES() {
+                if (window.DEMO_SITES && window.DEMO_SITES.length > 0) {
+                    loadSite();
+                    setupLanguageSwitcher();
+                    setupThemeSwitcher();
+                } else {
+                    setTimeout(waitForDEMOSITES, 50);
+                }
+            }
+            waitForDEMOSITES();
         });
 
         function loadSite() {
