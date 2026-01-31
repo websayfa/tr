@@ -1,6 +1,14 @@
 # 🌐 Kendi Domain'de Çalıştırma
 
-Zaten kendi domain'iniz (örn: www.example.com) varsa, bu yazılımı oraya nasıl kuracağınız anlatılıyor.
+## 📍 2 Seçenek
+
+Biri GitHub Pages kullanacak, biri kendi sunucusunda barındıracak.
+
+---
+
+# SEÇENEK 1: GitHub Pages (Ücretsiz Hosting)
+
+Zaten kendi domain'iniz (örn: www.example.com) varsa, bu yazılımı GitHub'da çalıştıracaksınız.
 
 ---
 
@@ -102,6 +110,115 @@ yazıp aç. Yazılım yüklenecek.
 4. 24 saati geçti mi?
 
 Hepsi iyiyse sorun yok.
+
+---
+
+---
+
+# SEÇENEK 2: Kendi Sunucuda Barındırma (cPanel, VPS, vb)
+
+Projeyi indir ve kendi sunucuna koy.
+
+---
+
+## 🎯 Ne Yapacağız?
+
+```
+Şu anda:  https://websayfa.github.io/tr
+Sonra:    https://www.example.com (Senin sunucu)
+```
+
+---
+
+## 📝 Yapılacak İşlemler
+
+### 1. Projeyi İndir
+
+GitHub'dan ZIP indir: https://github.com/websayfa/tr
+
+**Code** → **Download ZIP** → Bilgisayarına kaydet.
+
+---
+
+### 2. ZIP'i Aç
+
+```
+websayfa-tr-main.zip → Aç
+Klasör: websayfa-tr-main/
+```
+
+---
+
+### 3. Sunucuya Yükle
+
+**cPanel kullanıyorsan:**
+1. cPanel → **File Manager** aç
+2. **public_html** klasörüne gir
+3. Tüm dosyaları buraya kopyala (HTML, CSS, JS hepsini)
+
+**VPS/SSH kullanıyorsan:**
+```bash
+scp -r websayfa-tr-main/* user@sunucu.com:/var/www/example.com/
+```
+
+(Veya FTP ile Filezilla kullanabilirsin)
+
+**Sonuç:** `https://www.example.com` açınca index.html yüklenecek.
+
+---
+
+### 4. DNS Ayarla
+
+Domain sağlayıcısında (GoDaddy, Namecheap vb):
+
+**DNS → A Record:**
+```
+@ (root) → Senin sunucunun IP adresi
+www → Senin sunucunun IP adresi
+```
+
+Örnek:
+```
+@ → 192.0.2.1
+www → 192.0.2.1
+```
+
+(IP adresi hosting sağlayıcından alırsın)
+
+---
+
+### 5. Bekle
+
+24 saat bekle. `https://www.example.com` açtığında yazılım yüklenecek.
+
+---
+
+## ✅ Kontrol
+
+```
+https://www.example.com
+```
+
+yazıp aç. İndex sayfası gelmeli.
+
+---
+
+## 🐛 Sorun varsa?
+
+1. Tüm dosyalar sunucuya yüklendi mi?
+2. DNS A Record sunucunun IP'sine işaret ediyor mu?
+3. 24 saati geçti mi?
+4. index.html sunucuda var mı?
+
+---
+
+## ⚠️ ÖNEMLİ
+
+- Bu yazılım **statik dosyalardan oluşur** (HTML, CSS, JS)
+- **Veritabanı yok**
+- **Server-side kod yok**
+- Sadece dosyaları sunucuya koysan yeter
+- PHP, Node.js, Python kurmanız gerekmiyor
 
 ---
 
