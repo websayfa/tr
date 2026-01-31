@@ -442,16 +442,12 @@
         });
 
         function loadSite() {
-            console.log('loadSite() çalışıyor');
             const urlParams = new URLSearchParams(window.location.search);
             const siteId = urlParams.get('id');
-            console.log('siteId:', siteId);
             
             // Önce DEMO_SITES'te ara (main.js'den)
             const demoSites = window.DEMO_SITES || [];
-            console.log('window.DEMO_SITES:', demoSites.length, 'site bulundu');
             currentSite = demoSites.find(s => s.id === siteId);
-            console.log('currentSite bulundu:', !!currentSite);
             
             // Eğer bulunamazsa, localStorage'dan kullanıcı sitesini ara
             if (!currentSite) {
@@ -511,7 +507,6 @@
         }
 
         function renderSite() {
-            console.log('renderSite() çalışıyor, currentSite:', currentSite);
             const site = currentSite;
             const themeClass = `theme-${site.theme}`;
             
@@ -639,7 +634,6 @@
             // Content
             let mainHTML = '';
             const content = site.content;
-            console.log('content:', content);
             
             // About Section
             mainHTML += `
@@ -650,7 +644,6 @@
                     </div>
                 </section>
             `;
-            console.log('About section eklendi. mainHTML length:', mainHTML.length);
             
             // Services/Products Section
             const serviceName = content.services ? content.services[currentLang] : 'Hizmetler';
@@ -700,9 +693,7 @@
                 </section>
             `;
             
-            console.log('mainHTML hazır, length:', mainHTML.length);
             document.getElementById('siteContent').innerHTML = mainHTML;
-            console.log('siteContent innerHTML yazıldı');
         }
 
         function setupLanguageSwitcher() {
